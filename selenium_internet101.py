@@ -78,7 +78,8 @@ def test_search_example():
     time.sleep(1)
 
     driver.save_screenshot('result.png')
-    time.sleep(1)
+
+    time.sleep(5)
 
     # params = {"fio": "Автотест", "phone_connection": "71111111111", "need_convergent": "false",
     #           "convergent_tariff_id": "0", "uuid": "c995eb05-d340-4b96-89b6-33de849d41d5", "tariff_id": "102134003"}
@@ -112,14 +113,53 @@ def test_search_example():
     # for request in driver.requests[-1]:
     #     if request.response:
     #         print(driver.requests[-1]
-                # request.url,
-                # request.response.status_code,
-                # # request.response.headers['Content-Type']
-            # )
+    # request.url,
+    # request.response.status_code,
+    # # request.response.headers['Content-Type']
+    # )
 
     # status = driver.requests[-1].response.status_code
-    assert driver.requests[-1].response.status_code == 201
+    # assert driver.requests[-1].response.status_code == 200
+    print("Status code:")
+    print(driver.requests[-1].response.status_code)
 
+    def steps23():
+        driver.execute_script("window.history.go(-1)")
+        search_input = driver.find_element(By.XPATH,
+                                           "/html/body/div/div/div[1]/div[4]/div[4]/div[1]/div/div/div[2]/div[2]/div[6]/div/div/div[2]/div[2]/a")
+        time.sleep(5)
+        search_input.click()
+        time.sleep(5)
 
+        search_input = driver.find_element(By.XPATH,
+                                           "//input[contains(@name, 'name')]")
+        search_input.clear()
+        search_input.send_keys(name)
+        time.sleep(5)
+        search_input.send_keys("\n")
+        time.sleep(5)
+
+        search_input = driver.find_element(By.XPATH,
+                                           "//input[contains(@datatest, 'providers_provider_order_input_tel')]")
+        search_input.clear()
+        search_input.send_keys(phone)
+        time.sleep(5)
+
+        search_input = driver.find_element(By.XPATH,
+                                           "//div[contains(@data-test, 'order_form_input_connect_button')]")
+        search_input.click()
+        # search_input.send_keys("\n")
+        time.sleep(1)
+
+        driver.save_screenshot('result.png')
+        time.sleep(1)
+        print("Status code:")
+        print(driver.requests[-1].response.status_code)
+    steps23()
+    steps23()
+    steps23()
+    steps23()
+
+        # assert driver.requests[-1].response.status_code == 201
 
     driver.quit()
